@@ -1,5 +1,5 @@
 # 1 - Personel Library
-## Kişisel Kütüphane Uygulaması
+## KiÃ¾isel KÃ¼tÃ¼phane UygulamasÄ±
 
-# 2 - Ekelenecek Diğer Proje
-## İçerik bilgisi
+# 2 - Ekelenecek DiÃ°er Proje
+## Ä°Ã§erik bilgisi
