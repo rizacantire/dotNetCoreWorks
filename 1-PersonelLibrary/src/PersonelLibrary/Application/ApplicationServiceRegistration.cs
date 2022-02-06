@@ -1,4 +1,5 @@
-﻿using Application.Exeptions;
+﻿using Application.BusinessRules;
+using Application.Exeptions;
 using Application.Features.Commands.Categories.Categories;
 using FluentValidation;
 using MediatR;
@@ -23,8 +24,8 @@ namespace Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             //services.AddScoped<BusinessException>();
             services.AddScoped<CheckCategoryIsExist>();
-            
-
+            services.AddScoped<CheckAuthorIsExist>();
+            services.AddScoped<CheckBookIsExist>();
 
             return services;
         }

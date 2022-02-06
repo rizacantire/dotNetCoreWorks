@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\Authors\" />
-    <Folder Include="Features\Commands\Books\BookDelete\" />
-    <Folder Include="Features\Queries\Authors\" />
-    <Folder Include="Features\Queries\Books\" />
     <Folder Include="Validators\Authors\" />
   </ItemGroup>
 

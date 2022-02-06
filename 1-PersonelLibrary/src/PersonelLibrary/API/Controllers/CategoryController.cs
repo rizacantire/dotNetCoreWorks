@@ -1,11 +1,9 @@
 ﻿using Application.Contracts.Services;
-using Application.Features.Commands.Categories.Categories;
-using Application.Features.Commands.Categories.Categories.CategoryDelete;
-using Application.Features.Commands.Categories.Categories.CategoryUpdate;
+using Application.Features.Commands.Categories.CategoryAdd;
+using Application.Features.Commands.Categories.CategoryDelete;
+using Application.Features.Commands.Categories.CategoryUpdate;
 using Application.Features.Queries.Categories.GetCategories;
-using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

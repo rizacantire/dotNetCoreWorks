@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Categories.Categories.CategoryUpdate
+namespace Application.Features.Commands.Categories.CategoryUpdate
 {
     public class CategoryUpdateCommand : IRequest
     {

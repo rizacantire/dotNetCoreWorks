@@ -1,6 +1,6 @@
 ﻿using Application.Features.Commands.Books.BookAdd;
-using Application.Features.Commands.Categories.Categories;
-using Application.Features.Commands.Categories.Categories.CategoryDelete;
+using Application.Features.Commands.Categories.CategoryAdd;
+using Application.Features.Commands.Categories.CategoryDelete;
 using Application.Features.Queries.Categories.GetCategories;
 using Application.Models.Authors;
 using Application.Models.Books;
