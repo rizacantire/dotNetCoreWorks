@@ -1,4 +1,11 @@
-﻿using Infrastructure.Persistence;
+﻿using Application.Contracts.Repositories;
+using Application.Contracts.Repositories.Commons;
+using Application.Contracts.Services;
+using Infrastructure.Contracts.Repositories;
+using Infrastructure.Contracts.Repositories.Common;
+using Infrastructure.Contracts.Services;
+using Infrastructure.Contracts.Services.Common;
+using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +24,15 @@ namespace Infrastructure
         {
             services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("SqliteConnectionString")));
+            services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            
+
 
             return services;
         }
