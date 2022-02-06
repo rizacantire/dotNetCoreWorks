@@ -18,9 +18,9 @@ namespace Infrastructure.Contracts.Services.Common
             _repository = repository;
         }
 
-        public async Task Add(T entity)
+        public async  Task Add(T entity)
         {
-           await _repository.AddAsync(entity);
+            _repository.AddAsync(entity);
         }
 
         public async Task Delete(T entity)

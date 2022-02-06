@@ -49,9 +49,9 @@ namespace Infrastructure.Contracts.Repositories.Common
 
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate = null)
         {
-            return await _dbContext.Set<T>().Where(predicate).FirstAsync();
+            return await _dbContext.Set<T>().Where(predicate).FirstOrDefaultAsync();
         }
 
 

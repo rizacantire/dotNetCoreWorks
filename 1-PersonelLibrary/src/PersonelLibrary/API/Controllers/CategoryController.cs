@@ -1,7 +1,13 @@
 ﻿using Application.Contracts.Services;
+using Application.Features.Commands.Categories.Categories;
+using Application.Features.Commands.Categories.Categories.CategoryDelete;
+using Application.Features.Commands.Categories.Categories.CategoryUpdate;
+using Application.Features.Queries.Categories.GetCategories;
 using Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -10,22 +16,47 @@ namespace API.Controllers
     public class CategoryController : ControllerBase
     {
         private ICategoryService _categoryService;
+        private readonly IMediator _mediatr;
 
-        public CategoryController(ICategoryService categoryService)
+
+        public CategoryController(ICategoryService categoryService, IMediator mediator)
         {
             _categoryService = categoryService;
+            _mediatr = mediator;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_categoryService.GetAll());
+            var result = _mediatr.Send(new GetAllCategoriesListQuery());
+            return Ok(result.Result);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] Category category)
+        public async Task<IActionResult> Add([FromBody] CategoryAddCommand category)
         {
-            return Ok(_categoryService.Add(category));
+            var result = await _mediatr.Send(category);
+
+            return Ok(result);
         }
+
+        [HttpDelete()]
+        public async Task<IActionResult> Delete([FromQuery] CategoryDeleteCommand removeCommand)
+        {
+            var result = await _mediatr.Send(removeCommand);
+
+            return Ok(result);
+        }
+
+        [HttpPut()]
+        public async Task<IActionResult> Update([FromBody] CategoryUpdateCommand updateCommand)
+        {
+            var result = await _mediatr.Send(updateCommand);
+
+            return Ok(result);
+        }
+
+
+
     }
 }
