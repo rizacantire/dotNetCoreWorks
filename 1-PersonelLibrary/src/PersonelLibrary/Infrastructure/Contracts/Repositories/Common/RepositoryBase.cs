@@ -25,9 +25,10 @@ namespace Infrastructure.Contracts.Repositories.Common
         {
             _dbContext.Set<T>().Add(entity);
             await _dbContext.SaveChangesAsync();
+
             return entity;
         }
-
+        
         public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Queries.Books.GetBooks
+namespace Application.Features.Queries.Books.GetBooks.GetBooksByAuthor
 {
-    public class GetAllBooksListQuery : IRequest<IList<BookDetailVm>>
+    public class GetBooksByAuthorQuery : IRequest<IList<BookByAuthor>>
     {
     }
 }

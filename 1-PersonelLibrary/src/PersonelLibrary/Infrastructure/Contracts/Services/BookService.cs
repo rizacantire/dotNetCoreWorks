@@ -12,8 +12,18 @@ namespace Infrastructure.Contracts.Services
 {
     public class BookService : ServiceBase<Book, IBookRepository>, IBookService
     {
+        private IBookRepository _bookRepository;
         public BookService(IBookRepository repository) : base(repository)
         {
+            _bookRepository = repository;
+        }
+
+
+        public IList<Book> GetByAuthorId(int authorId)
+        {
+            var list = _bookRepository.GetBookDetails().Result.Where(c => c.AuthorId == authorId);
+            return list.ToList();
         }
     }
 }
+

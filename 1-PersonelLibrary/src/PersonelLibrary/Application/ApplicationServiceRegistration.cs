@@ -26,6 +26,9 @@ namespace Application
             services.AddScoped<CheckCategoryIsExist>();
             services.AddScoped<CheckAuthorIsExist>();
             services.AddScoped<CheckBookIsExist>();
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             return services;
         }
