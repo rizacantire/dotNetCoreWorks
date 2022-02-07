@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Repositories;
+﻿using Application.BusinessRules;
+using Application.Contracts.Repositories;
 using AutoMapper;
 using MediatR;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Categories.Categories.CategoryUpdate
+namespace Application.Features.Commands.Categories.CategoryUpdate
 {
     public class CategoryUpdateCommandHandler : IRequestHandler<CategoryUpdateCommand>
     {
@@ -25,7 +26,7 @@ namespace Application.Features.Commands.Categories.Categories.CategoryUpdate
 
         public async Task<Unit> Handle(CategoryUpdateCommand request, CancellationToken cancellationToken)
         {
-            await _check.CheckCategoryIsExistByIdAsync(request.Id);
+            await _check.CheckIsExistByIdAsync(request.Id);
             var getCat = await this._categoryRepository.GetByIdAsync(request.Id);
             getCat.Name = request.Name;
 

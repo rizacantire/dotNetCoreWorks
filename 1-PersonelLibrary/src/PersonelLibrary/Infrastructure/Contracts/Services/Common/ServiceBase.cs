@@ -20,7 +20,7 @@ namespace Infrastructure.Contracts.Services.Common
 
         public async  Task Add(T entity)
         {
-            _repository.AddAsync(entity);
+            await _repository.AddAsync(entity);
         }
 
         public async Task Delete(T entity)

@@ -1,5 +1,4 @@
 ﻿using Application.Models.Books;
-using Application.Models.Categories;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -8,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Categories.Categories
+namespace Application.Features.Commands.Books.BookUpdate
 {
-    public class CategoryAddCommand : CategoryAddVm, IRequest<Category>
+    public class BookUpdateCommand : BookUpdateVm, IRequest
     {
+       
     }
 }

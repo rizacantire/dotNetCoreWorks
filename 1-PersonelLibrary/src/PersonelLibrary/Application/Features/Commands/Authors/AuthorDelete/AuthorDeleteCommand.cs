@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Categories.Categories.CategoryDelete
+namespace Application.Features.Commands.Authors.AuthorDelete
 {
-    public class CategoryDeleteCommand : IRequest
+    public class AuthorDeleteCommand : IRequest
     {
         public int Id { get; set; }
     }

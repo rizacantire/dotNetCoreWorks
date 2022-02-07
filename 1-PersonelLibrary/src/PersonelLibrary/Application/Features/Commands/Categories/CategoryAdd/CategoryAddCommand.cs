@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Books.BookAdd
+namespace Application.Features.Commands.Categories.CategoryAdd
 
 {
-    public class BookAddCommand : BookAddVm, IRequest<Book>
+    public class CategoryAddCommand : CategoryAddVm, IRequest<Category>
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Repositories;
+﻿using Application.BusinessRules;
+using Application.Contracts.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Commands.Categories.Categories
+namespace Application.Features.Commands.Categories.CategoryAdd
 {
     public class CategoryAddCommandHandler : IRequestHandler<CategoryAddCommand, Category>
     {
@@ -26,7 +27,7 @@ namespace Application.Features.Commands.Categories.Categories
 
         public async Task<Category> Handle(CategoryAddCommand request, CancellationToken cancellationToken)
         {
-            await _check.CheckCategoryIsExistAsync(request.Name);
+            await _check.CheckIsExistByNameAsync(request.Name);
 
             var categoryEntity = _mapper.Map<Category>(request);
 

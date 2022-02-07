@@ -10,5 +10,7 @@ namespace Application.Contracts.Services
 {
     public interface IBookService : IServiceBase<Book>
     {
+        IList<Book> GetByAuthorId(int authorId);
+     
     }
 }

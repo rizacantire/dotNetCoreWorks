@@ -1,4 +1,6 @@
-﻿using Application.Contracts.Repositories;
+﻿using Application.BusinessRules;
+using Application.Contracts.Repositories;
+using Application.Features.Commands.Categories.CategoryDelete;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -25,7 +27,7 @@ namespace Application.Features.Commands.Categories.Categories.CategoryDelete
         }
         public async Task<Unit> Handle(CategoryDeleteCommand request, CancellationToken cancellationToken)
         {
-            await _check.CheckCategoryIsExistByIdAsync(request.Id);
+            await _check.CheckIsExistByIdAsync(request.Id);
             var getCat = await this._categoryRepository.GetByIdAsync(request.Id);
       
             await _categoryRepository.RemoveAsync(getCat);
