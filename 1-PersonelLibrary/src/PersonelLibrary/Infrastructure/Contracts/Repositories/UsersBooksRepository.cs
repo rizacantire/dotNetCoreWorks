@@ -15,5 +15,13 @@ namespace Infrastructure.Contracts.Repositories
         public UsersBooksRepository(LibraryContext dbContext) : base(dbContext)
         {
         }
+
+        public IList<UsersBooks> GetByUser(int userID)
+        {
+            var list = base.GetAllAsync(b => b.UserId == userID).Result.ToList();
+            return list;
+           
+
+        }
     }
 }

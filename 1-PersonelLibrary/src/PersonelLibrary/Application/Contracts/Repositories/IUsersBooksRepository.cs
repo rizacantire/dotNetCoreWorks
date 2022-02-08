@@ -10,5 +10,7 @@ namespace Application.Contracts.Repositories
 {
     public interface IUsersBooksRepository : IRepositoryBase<UsersBooks>
     {
+        IList<UsersBooks> GetByUser(int userId);
     }
+   
 }

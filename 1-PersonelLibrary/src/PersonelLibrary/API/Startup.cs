@@ -1,5 +1,8 @@
 using Application;
+using Domain.Entities;
 using Infrastructure;
+using Infrastructure.Persistence;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +39,8 @@ namespace API
             });
             services.AddInfrastructureService(Configuration);
             services.AddApplicationService(Configuration);
+            services.AddApiService(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +57,10 @@ namespace API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints =>
             {

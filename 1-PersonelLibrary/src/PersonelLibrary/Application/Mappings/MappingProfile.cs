@@ -1,11 +1,14 @@
-﻿using Application.Features.Commands.Books.BookAdd;
+﻿using Application.Features.Commands.Authentications.SignUpUser;
+using Application.Features.Commands.Books.BookAdd;
 using Application.Features.Commands.Categories.CategoryAdd;
 using Application.Features.Commands.Categories.CategoryDelete;
 using Application.Features.Queries.Books.GetBooks;
 using Application.Features.Queries.Categories.GetCategories;
+using Application.Models.Authentications;
 using Application.Models.Authors;
 using Application.Models.Books;
 using Application.Models.Categories;
+using Application.Models.UsersBooks;
 using AutoMapper;
 using Domain.Entities;
 
@@ -16,6 +19,12 @@ namespace Application.Mappings
     {
         public MappingProfile()
         {
+            #region Authentications
+
+            CreateMap<User, SignUpUserCommand>().ReverseMap();
+            CreateMap<User, UserModel>().ReverseMap();
+
+            #endregion
             #region Categories
             CreateMap<Category, CategoryAddVm>().ReverseMap();
             CreateMap<Category, CategoryVm>().ReverseMap();
@@ -61,6 +70,12 @@ namespace Application.Mappings
             CreateMap<BookByAuthor, Category>().ReverseMap(); 
             CreateMap<BookByAuthor, GetAllBooksListQuery>().ReverseMap();
             CreateMap<GetAllBooksListQuery, BookByAuthor>().ReverseMap();
+            #endregion
+
+            #region Users Book
+
+            CreateMap<UsersBooksAddVm, UsersBooks>().ReverseMap();
+
             #endregion
         }
     }
