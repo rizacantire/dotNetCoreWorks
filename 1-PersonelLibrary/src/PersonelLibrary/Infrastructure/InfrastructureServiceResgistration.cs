@@ -24,6 +24,7 @@ namespace Infrastructure
         {
             services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("SqliteConnectionString")));
+                        //.UseSqlServer(configuration.GetConnectionString("SqlConnectionString")));
             services.AddTransient(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
             services.AddScoped<IAuthorRepository, AuthorRepository>();
@@ -34,6 +35,9 @@ namespace Infrastructure
 
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookService, BookService>();
+
+            services.AddScoped<IUsersBooksRepository, UsersBooksRepository>();
+            services.AddScoped<IUsersBooksService, UsersBooksService>();
 
 
 

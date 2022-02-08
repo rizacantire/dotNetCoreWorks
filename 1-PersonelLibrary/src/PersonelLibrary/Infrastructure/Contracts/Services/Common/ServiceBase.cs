@@ -35,6 +35,7 @@ namespace Infrastructure.Contracts.Services.Common
 
         public async Task<T> GetById(int id)
         {
+
             return await _repository.GetByIdAsync(id);
         }
 

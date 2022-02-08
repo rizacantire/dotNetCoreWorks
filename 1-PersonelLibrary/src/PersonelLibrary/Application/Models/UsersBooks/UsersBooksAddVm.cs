@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Application.Models.UsersBooks
 {
-    internal class UsersBooksAddVm
+    public class UsersBooksAddVm
     {
+        public int UserId { get; set; }
+        public int BookId { get; set; }
+        public bool IsRead { get; set; }
+        public DateTime? StartReadDate { get; set; }
+        public DateTime? FinishReadDate { get; set; }
     }
 }

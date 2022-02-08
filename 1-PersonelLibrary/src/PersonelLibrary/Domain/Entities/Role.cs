@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class User : IdentityUser<int>
+    public class Role : IdentityRole<int>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public List<UsersBooks> UsersBooks { get; set; }
 
     }
 }

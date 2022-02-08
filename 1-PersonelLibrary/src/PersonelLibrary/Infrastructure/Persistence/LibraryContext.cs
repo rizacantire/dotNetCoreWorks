@@ -1,4 +1,6 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,8 +10,12 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class LibraryContext : DbContext
+    public class LibraryContext : IdentityDbContext<User,Role,int>
     {
+        public LibraryContext()
+        {
+        }
+
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
 
@@ -18,8 +24,7 @@ namespace Infrastructure.Persistence
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book>  Books { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Person> Persons { get; set; }
+        //public DbSet<Person> Persons { get; set; }
         public DbSet<UsersBooks> UsersBooks { get; set; }
 
     }

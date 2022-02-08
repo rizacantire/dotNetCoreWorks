@@ -10,5 +10,6 @@ namespace Application.Contracts.Services
 {
     public interface IUsersBooksService : IServiceBase<UsersBooks>
     {
+        IList<UsersBooks> GetByUserId(int userId);
     }
 }
