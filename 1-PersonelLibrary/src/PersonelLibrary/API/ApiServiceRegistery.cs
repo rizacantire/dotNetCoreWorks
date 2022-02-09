@@ -23,6 +23,7 @@ namespace API
 
             #endregion
 
+            #region Kullanıcı şifre kısıtlama
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequiredLength = 8;
@@ -31,6 +32,8 @@ namespace API
                 options.Lockout.MaxFailedAccessAttempts = 5;
 
             }).AddEntityFrameworkStores<LibraryContext>().AddDefaultTokenProviders();
+
+            #endregion
 
             services.ConfigureCors();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Commons
 {
-    public class EntityBase
+    public abstract class EntityBase
     {
         public int Id { get; set; }
     }
