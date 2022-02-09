@@ -25,7 +25,7 @@ namespace Application.Features.Queries.Books.GetBooks.GetBooksByAuthor
 
         public async Task<IList<BookByAuthor>> Handle(GetBooksByAuthorQuery request, CancellationToken cancellationToken)
         {
-            var books = _bookRepository.GetAllAsync();
+            var books =await _bookRepository.GetAllAsync();
             var returnList = _mapper.Map<IList<BookByAuthor>>(books);
             return (IList<BookByAuthor>)returnList;
         }

@@ -36,6 +36,17 @@ namespace API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                //c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer"
+                });
+                c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+
+                
             });
             services.AddInfrastructureService(Configuration);
             services.AddApplicationService(Configuration);

@@ -25,7 +25,7 @@ namespace Application.Features.Queries.Books.GetBooks
 
         public async Task<IList<BookDetailVm>> Handle(GetAllBooksListQuery request, CancellationToken cancellationToken)
         {
-            var books = _bookRepository.GetBookDetails();
+            var books =await _bookRepository.GetBookDetails();
             var returnList = _mapper.Map<IList<BookDetailVm>>(books);
             return returnList;
         }

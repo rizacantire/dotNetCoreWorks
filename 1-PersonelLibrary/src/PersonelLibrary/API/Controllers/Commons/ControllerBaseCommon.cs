@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Services.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -23,13 +24,14 @@ namespace API.Controllers.Commons
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add([FromBody] TAddCommand category)
         {
             var result = await _mediatr.Send(category);
 
             return Ok(result);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete()]
         public async Task<IActionResult> Delete([FromQuery] TDeleteCommand removeCommand)
         {
@@ -37,7 +39,7 @@ namespace API.Controllers.Commons
 
             return Ok(result);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut()]
         public async Task<IActionResult> Update([FromBody] TUpdateCommand updateCommand)
         {

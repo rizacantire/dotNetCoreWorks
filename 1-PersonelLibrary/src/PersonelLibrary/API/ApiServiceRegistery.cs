@@ -33,8 +33,18 @@ namespace API
             }).AddEntityFrameworkStores<LibraryContext>().AddDefaultTokenProviders();
 
             services.ConfigureCors();
-    
+
             services.AddAuth(jwt);
+            services.AddAuthorization(options =>
+            {
+
+                options.AddPolicy("Admin",
+                    authBuilder =>
+                    {
+                        authBuilder.RequireRole("Administrators");
+                    });
+
+            });
 
 
             return services;
