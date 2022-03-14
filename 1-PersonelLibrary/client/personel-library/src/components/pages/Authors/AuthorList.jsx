@@ -1,31 +1,41 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Table } from 'antd';
+import { Row, Col, Table, Button } from 'antd';
 import { useSelector,useDispatch } from 'react-redux';
-import { authorList, getAuthorsAsync } from '../../../redux/reducers/authorSlice';
+import { authorList, getAuthorsAsync,deleteAuthorAsync } from '../../../redux/reducers/authorSlice';
 import AuthorAdd from './AuthorAdd';
+import ButtonGroup from 'antd/lib/button/button-group';
 
 export default  function AuthorList() {
     const dispatch = useDispatch()
     const getList = useSelector(authorList)
-    
+    const deleteItem = (id)=>{
+      console.log(id);
+      dispatch(deleteAuthorAsync(id))
+    }
+
+    const updateItem = (id)=>{
+      console.log(id);
+      dispatch(deleteAuthorAsync(id))
+    }
     
     const getBirthDate =(birthDate)=>{
       var dateObj = new Date(birthDate);
-      var month = dateObj.getUTCMonth() + 1; //months from 1-12
-      var day = dateObj.getUTCDate();
-      var year = dateObj.getUTCFullYear();
+      var month = dateObj.getMonth()+1;
+      var day = dateObj.getDate();
+      var year = dateObj.getFullYear();
       var returnDate = day.toString()+"-"+month.toString() +"-" +year.toString()
       return returnDate
     }
-    const getData = getList.map((message) => ({
-      key:message.id,
-      fullName:message.firstName+" "+message.lastName,
-      birthDate: getBirthDate(message.birthDate)
+    const getData = getList.map((item) => ({
+      key:item.id,
+      fullName:item.firstName+" "+item.lastName,
+      birthDate: getBirthDate(item.birthDate),
+      configureItem:(<ButtonGroup>
+        <Button size="small" type="primary" danger onClick={()=>{deleteItem(item.id)}}>Sil</Button><Button size="small" type="primary" onClick={()=>{updateItem(item.id)}}>Update</Button>
+      </ButtonGroup>)
      
     }));
-    const items = [...getData].sort((a, b) => b.id - a.id);
-
-    
+   
 
     useEffect(() => {
         dispatch(getAuthorsAsync())
@@ -39,6 +49,10 @@ export default  function AuthorList() {
         {
           title: 'Doğum Tarihi',
           dataIndex: "birthDate",
+        },
+        {
+          title:"",
+          dataIndex:"configureItem"
         }
       ];
 
@@ -46,7 +60,7 @@ export default  function AuthorList() {
   return (
     <div>
       <Row>
-      <Col  sm={24} md={12}><Table columns={columns} dataSource={items} size="middle" /></Col>
+      <Col  sm={24} md={12}><Table columns={columns} dataSource={getData} size="middle" /></Col>
       <Col  sm={24} md={12} ><AuthorAdd/></Col>
     </Row>
         

@@ -1,32 +1,46 @@
-import React, {  useState } from "react";
-import {  useDispatch } from "react-redux";
-import { FormGroup, FormControl, InputLabel, Input,Button } from "@mui/material";
-import { addCatAsync } from "../../../redux/reducers/catSlice";
+import { Form, Input, Button } from "antd";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addCategoryAsync } from "../../../redux/reducers/categorySlice";
 
 export default function CategoryAdd() {
-    const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const handleSubmit = async () => {
-        //e.preventDefault()
-        let commentator = { name: name };
-        if(window.confirm("Ekleme gerçekleştirilsin mi?")){
-            await dispatch(addCatAsync(commentator));
-            setName("")
-        }   
-      };
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+
+  const handleSubmit = async (values) => {
+
+    if (window.confirm("Ekleme gerçekleştirilsin mi?")) {
+      await dispatch(addCategoryAsync(values));
+      form.resetFields()
+    }
+  };
   return (
     <div>
-<FormGroup sx={{margin:"0em 5em"}}>
-        <FormControl sx={{margin:"0.5em 0"}}>
-          <InputLabel htmlFor="name">Adı</InputLabel>
-          <Input value={name} onChange={(e)=>setName(e.target.value)} id="name" />
-        </FormControl>
-        
-        <br />
-        <Button sx={{width:"80px",margin:"auto"}} variant="contained" onClick={()=>handleSubmit()}
-        
-        >Ekle</Button>
-      </FormGroup>
+      <Form
+        form={form}
+        onFinish={handleSubmit}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        layout="horizontal"
+      >
+        <Form.Item
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          name="name"
+          label="Kategori"
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item style={{ marginLeft: "50%" }}>
+          <Button type="primary" htmlType="submit">
+            Ekle
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
-  )
+  );
 }
