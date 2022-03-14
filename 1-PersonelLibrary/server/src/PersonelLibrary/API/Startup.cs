@@ -33,6 +33,10 @@ namespace API
         {
 
             services.AddControllers();
+            services.AddCors(options =>
+                 options.AddDefaultPolicy(builder =>
+                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -51,7 +55,7 @@ namespace API
             services.AddInfrastructureService(Configuration);
             services.AddApplicationService(Configuration);
             services.AddApiService(Configuration);
-
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,11 +71,10 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthentication();
-            app.UseAuthorization();
 
-            app.UseCors("MyPolicy");
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -24,7 +24,7 @@ namespace API.Controllers.Commons
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add([FromBody] TAddCommand category)
         {
             var result = await _mediatr.Send(category);

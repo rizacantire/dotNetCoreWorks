@@ -35,7 +35,6 @@ namespace API
 
             #endregion
 
-            services.ConfigureCors();
 
             services.AddAuth(jwt);
             services.AddAuthorization(options =>
