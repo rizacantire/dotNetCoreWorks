@@ -42,7 +42,7 @@ namespace API.Controllers
         }
 
         [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn(string email, string password)
+        public async Task<IActionResult> SignIn([FromQuery] string email, string password)
         {
             var query = new GetUserByEmailAndPasswordQuery(email, password);
             var userModel = await _mediator.Send(query);
@@ -60,8 +60,10 @@ namespace API.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, userModel.Id.ToString()),
                     new Claim(ClaimTypes.Name, userModel.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, userModel.Id.ToString())
-                };
+                    new Claim(ClaimTypes.NameIdentifier, userModel.Id.ToString()),
+                    new Claim("UserRole",userModel.Roles.FirstOrDefault()?.ToString())
+
+            };
 
             var roleClaims = userModel.Roles.Select(r => new Claim(ClaimTypes.Role, r));
             claims.AddRange(roleClaims);
