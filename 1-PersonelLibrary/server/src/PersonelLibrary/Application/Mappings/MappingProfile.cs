@@ -1,4 +1,5 @@
 ﻿using Application.Features.Commands.Authentications.SignUpUser;
+using Application.Features.Commands.Authentications.UpdateUser;
 using Application.Features.Commands.Books.BookAdd;
 using Application.Features.Commands.Categories.CategoryAdd;
 using Application.Features.Commands.Categories.CategoryDelete;
@@ -23,6 +24,7 @@ namespace Application.Mappings
 
             CreateMap<User, SignUpUserCommand>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
+            CreateMap<User, UpdateUserCommand>().ReverseMap();
 
             #endregion
             #region Categories

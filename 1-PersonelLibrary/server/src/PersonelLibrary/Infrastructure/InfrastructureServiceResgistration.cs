@@ -39,6 +39,9 @@ namespace Infrastructure
             services.AddScoped<IUsersBooksRepository, UsersBooksRepository>();
             services.AddScoped<IUsersBooksService, UsersBooksService>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
 
 
             return services;
