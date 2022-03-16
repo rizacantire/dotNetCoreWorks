@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { Row, Col, Table, Button } from 'antd';
+import { Row, Col, Table, Button,Popconfirm } from 'antd';
 import { useSelector,useDispatch } from 'react-redux';
 import { authorList, getAuthorsAsync,deleteAuthorAsync } from '../../../redux/reducers/authorSlice';
 import AuthorAdd from './AuthorAdd';
@@ -58,7 +58,14 @@ export default  function AuthorList() {
         {
           title:"",
           dataIndex:"configureItem",
-          
+          render: (_) =>
+          getData.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => console.log("evet")}>
+              <ButtonGroup>
+        <Button size="small" type="primary" danger onClick={(event)=>{console.log(event)}}>Sil</Button><Button size="small" type="primary" onConfirm={(event)=>{console.log(event)}}>Update</Button>
+      </ButtonGroup>
+            </Popconfirm>
+          ) : null,
         }
       ];
 

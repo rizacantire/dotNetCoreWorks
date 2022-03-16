@@ -1,7 +1,7 @@
 import React from "react";
 import {  Menu } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 export default function SideNavi() {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Queries.Authentications.GetAllUser
 {
-    public class GetAllUserQuery : IRequest<IList<User>>
+    public class GetAllUserQuery : IRequest<IList<UserModel>>
     {
     }
 }

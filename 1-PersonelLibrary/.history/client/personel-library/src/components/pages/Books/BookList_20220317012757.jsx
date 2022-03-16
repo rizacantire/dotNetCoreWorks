@@ -1,13 +1,10 @@
 import React ,{useEffect} from 'react'
-import { Table } from 'antd';
+import {  Table } from 'antd';
 import { useSelector,useDispatch } from 'react-redux';
 import { bookList, getBooksAsync } from '../../../redux/reducers/bookSlice';
-
 export default function BookList() {
- 
   const dispatch = useDispatch()
   const getBookList = useSelector(bookList)
- 
   const columns = [
     {
       title: 'Kitap Adı',

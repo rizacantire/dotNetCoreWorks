@@ -12,21 +12,7 @@ export const updatePassAsync = createAsyncThunk("api/updatePass",async(entity)=>
 })
 
 export const userSlice = createSlice({
-    name:"users",
-    initialState:{
-        items:[]
-    },
-    extraReducers:{
-        [getUsersAsync.fulfilled]:(state,action)=>{
-            state.items = action.payload
-        },
-        [updatePassAsync.fulfilled]:(state,action)=>{
-            const {id} = action.meta.arg
-            const updateUser = action.meta.arg
-            const index = state.items.findIndex((item)=>item.id === id)
-            state.items[index] = updateUser
-        }
-    }
+
 })
 
 export default userSlice.reducer;

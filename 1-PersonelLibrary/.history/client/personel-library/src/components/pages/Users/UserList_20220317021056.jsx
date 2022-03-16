@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getUsersAsync
+  getUsersAsync,
+  updatePassAsync,
 } from "../../../redux/reducers/userSlice";
 import { Table, Button,Row,Col } from "antd";
 import ButtonGroup from "antd/lib/button/button-group";

@@ -1,7 +1,7 @@
 import React from "react";
 import {  Menu } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 export default function SideNavi() {
@@ -29,28 +29,30 @@ export default function SideNavi() {
                 <Link to={"/yazar"}>Yazar</Link>
               </Menu.Item>
               <Menu.Item key="2"><Link to={"/kategori"}>Kategori</Link></Menu.Item>
-              <Menu.Item key="3">
-                <Link to={"/kitap"}>Kitap</Link>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Link to={"/authors"}>Authors</Link>
-              </Menu.Item>
+              
             </SubMenu>
             <SubMenu key="sub2" icon={<LaptopOutlined />} title="Kitap">
               <Menu.Item key="5">
                 <Link to={"/kitaplar"}>Kitap Listesi</Link>
               </Menu.Item>
               <Menu.Item key="6">
-                <Link to={"kitap-ekle"}>Kitap Ekle</Link>
+                <Link to={"/kitap-ekle"}>Kitap Ekle</Link>
               </Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
+             
             </SubMenu>
-            <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
+            <SubMenu key="sub3" icon={<NotificationOutlined />} title="Üyeler">
+              <Menu.Item key="9">
+                <Link to={"/uyeler"}>
+                Üye Listesi</Link>
+              </Menu.Item>
+              <Menu.Item key="10">
+                <Link to={"/uye-kitap"}>
+                Üye Kitap Ekranı</Link>
+              </Menu.Item>
+              <Menu.Item key="10">
+                <Link to={"/uye-yetki"}>
+                Yetkilendirme</Link>
+              </Menu.Item>
             </SubMenu>
           </Menu>
     </div>
