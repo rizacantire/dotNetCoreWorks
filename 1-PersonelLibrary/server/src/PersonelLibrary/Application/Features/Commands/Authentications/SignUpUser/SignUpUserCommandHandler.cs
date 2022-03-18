@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Models.Authentications;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -32,13 +33,19 @@ namespace Application.Features.Commands.Authentications.SignUpUser
             var userEntity = _mapper.Map<User>(request);
 
             userEntity.UserName = request.Email;
+           
+           
+            var getRole = _roleManager.RoleExistsAsync("USER");
+            var defaultrole = _roleManager.FindByNameAsync("User").Result;
 
             var userCreateResult = await _userManager.CreateAsync(userEntity, request.Password);
-
+           
             if (userCreateResult.Succeeded)
             {
                 var user = _userManager.Users.SingleOrDefault(u => u.Email == request.Email);
-
+               await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                //_userManager.AddToRoleAsync(user, "USER");
+               
                 return user.Id;
             }
 

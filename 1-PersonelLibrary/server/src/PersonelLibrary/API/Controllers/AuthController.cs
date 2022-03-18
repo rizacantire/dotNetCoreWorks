@@ -55,13 +55,15 @@ namespace API.Controllers
 
         private string GenerateJwt(UserModel userModel)
         {
+            var userFullName = userModel.FirstName + " " + userModel.LastName;
             var claims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, userModel.Id.ToString()),
                     new Claim(ClaimTypes.Name, userModel.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.NameIdentifier, userModel.Id.ToString()),
-                    new Claim("UserRole",userModel.Roles.FirstOrDefault()?.ToString())
+                    new Claim("UserRole",userModel.Roles.FirstOrDefault()?.ToString()),
+                    new Claim("FullName", userFullName)
 
             };
 

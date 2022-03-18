@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <Compile Remove="Validators\Authors\**" />
+    <EmbeddedResource Remove="Validators\Authors\**" />
+    <None Remove="Validators\Authors\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\Authors\" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

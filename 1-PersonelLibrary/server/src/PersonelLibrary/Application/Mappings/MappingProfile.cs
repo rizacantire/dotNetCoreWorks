@@ -3,6 +3,9 @@ using Application.Features.Commands.Authentications.UpdateUser;
 using Application.Features.Commands.Books.BookAdd;
 using Application.Features.Commands.Categories.CategoryAdd;
 using Application.Features.Commands.Categories.CategoryDelete;
+using Application.Features.Commands.UserBooks;
+using Application.Features.Commands.UserBooks.AddUserBook;
+using Application.Features.Commands.UserBooks.UpdateUserBook;
 using Application.Features.Queries.Books.GetBooks;
 using Application.Features.Queries.Categories.GetCategories;
 using Application.Models.Authentications;
@@ -75,8 +78,14 @@ namespace Application.Mappings
             #endregion
 
             #region Users Book
-
+            
+            CreateMap<UsersBooksUpdateVm, UsersBooks>().ReverseMap();
+            
+            CreateMap<UsersBooks, UpdateUserBookCommand>().ReverseMap();
             CreateMap<UsersBooksAddVm, UsersBooks>().ReverseMap();
+            CreateMap<UsersBooks, UsersBooksVm>().ReverseMap();
+            CreateMap<UsersBooks, AddUserBookCommand>().ReverseMap();
+
 
             #endregion
         }

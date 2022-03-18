@@ -26,8 +26,8 @@ namespace API
             #region Kullanıcı şifre kısıtlama
             services.AddIdentity<User, Role>(options =>
             {
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 6;
+                //options.Password.RequireNonAlphanumeric = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1d);
                 options.Lockout.MaxFailedAccessAttempts = 5;
 

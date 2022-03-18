@@ -102,6 +102,22 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "2",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -173,6 +189,78 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "66fd14ae-746a-44bd-a900-5aceaea6e744",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            FirstName = "Rıza Can",
+                            LastName = "Tire",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEFaPGu/miazRZb6+9GxnU8yX/iIc+ga5UDgdMfqW084pNrVqi7p+ugz6ynG8bTUPrw==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "58439289-9d22-4049-a9cf-d6f2f0ed9b8b",
+                            Email = "ahmet@admin.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ahmet",
+                            LastName = "Tire",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEM20msI3Gx7RENPJ5Z62y7WKdx+Oyf7CF+ASCA9fr1daWItqFvLps8OS6XFucELDCg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bcbe80b4-182a-49fb-897c-61743e698d02",
+                            Email = "d@d.com",
+                            EmailConfirmed = false,
+                            FirstName = "Demiralp",
+                            LastName = "Tire",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEGAlIyownNZTKDuvoUv/jfyxH3+pj3MHmYwbhZhAU9wdCRwvcB76M5BYkBDjB2TVVw==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bdab28da-f7dc-4506-b8db-dbb723c58b26",
+                            Email = "y@y.com",
+                            EmailConfirmed = false,
+                            FirstName = "Yasemin",
+                            LastName = "Tire",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEDonIdSMJV22zeDsaTP5MJre4+cpcq91uPwuHABxl+BmN9V9vKb/sEwwG8DnXJzuiQ==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "33fb8f9a-8852-41cb-b756-b8b61fb631ec",
+                            Email = "h@h.com",
+                            EmailConfirmed = false,
+                            FirstName = "Hasibe",
+                            LastName = "Tire",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEPZ0N5aeQkrjtQAK0lcRsyY337C6+hk6Z5XU+EPei9yiOyYFXx7isGva6K4R+aXb7g==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UsersBooks", b =>
@@ -184,13 +272,13 @@ namespace Infrastructure.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("FinishReadDate")
+                    b.Property<DateTime?>("FinishReadDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartReadDate")
+                    b.Property<DateTime?>("StartReadDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -278,11 +366,17 @@ namespace Infrastructure.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<int>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -302,6 +396,40 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<int>");
+
+                    b.HasDiscriminator().HasValue("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            RoleId = 2
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Book", b =>

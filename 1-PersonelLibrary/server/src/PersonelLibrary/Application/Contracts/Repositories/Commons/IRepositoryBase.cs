@@ -13,9 +13,11 @@ namespace Application.Contracts.Repositories.Commons
 
         Task<T> GetAsync(Expression<Func<T, bool>> predicate = null);
 
-        Task<IList<T>> GetAllAsync();
-        Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<Expression<Func<T, object>>> includes = null, bool disableTracking = true);
-
+        Task<IReadOnlyList<T>> GetAllAsync();
+        Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null,
+                                       Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                       bool disableTracking = true,
+                                       string includeString = null, params string[] includeStrings);
 
         Task<T> GetByIdAsync(int id);
 
