@@ -38,9 +38,8 @@ export default function AuthorUpdate(props) {
   return (
     <div>
      <Form
-       form={form}
-            onFinish={changeUpdate}
-
+      form={form}
+      onFinish={changeUpdate}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       layout="horizontal"
