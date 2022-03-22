@@ -40,7 +40,8 @@ namespace Infrastructure
             services.AddScoped<IUsersBooksService, UsersBooksService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-
+            
+            services.AddScoped<IBookXmlService, BookAddXmlService>();
 
 
 

@@ -9,7 +9,7 @@ namespace Application.Models.Books
     public class BookAddVm
     {
         public string Name { get; set; }
-        public int Page { get; set; }
+        public int? Page { get; set; }
         public int AuthorId { get; set; }
         public int CategoryId { get; set; }
 

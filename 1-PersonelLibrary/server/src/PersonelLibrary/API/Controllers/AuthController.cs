@@ -1,4 +1,5 @@
 ﻿using Application.Features.Commands.Authentications.SignUpUser;
+using Application.Features.Commands.Users.ChangeRole;
 using Application.Features.Queries.Authentications.GetUser;
 using Application.Models.Authentications;
 using Application.Settings;
@@ -51,6 +52,13 @@ namespace API.Controllers
                 return Ok(GenerateJwt(userModel));
             
             return BadRequest("Email or password invalid");
+        }
+
+        [HttpPost("ChangeRole")]
+        public IActionResult ChangeUserRole(ChangeRoleCommand command)
+        {
+
+            return Ok(_mediator.Send(command));
         }
 
         private string GenerateJwt(UserModel userModel)

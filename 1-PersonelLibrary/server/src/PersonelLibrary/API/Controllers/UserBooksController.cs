@@ -33,7 +33,15 @@ namespace API.Controllers
         public IActionResult Get()
         {
 
-            return Ok(_usersBooksService.GetAll().Result);
+            return Ok(_usersBooksService.GetAllAsync().Result);
+        }
+        
+        [HttpGet]
+        [Route("GetAllByGroupAsync")]
+        public IActionResult GetAllByGroupAsync()
+        {
+
+            return Ok(_usersBooksService.GetAllByGroupAsync().Result);
         }
 
         [HttpPost]
@@ -55,6 +63,14 @@ namespace API.Controllers
             return Ok(_usersBooksService.GetByUserId(userId));
         }
 
+
+        [HttpGet("{id}")]
+
+        public IActionResult getByUserId(int id)
+        {
+
+            return Ok(_usersBooksService.GetByUserIdDetail(id));
+        }
         [HttpPut]
         public IActionResult UpdateBook([FromBody] UpdateUserBookCommand book)
         {

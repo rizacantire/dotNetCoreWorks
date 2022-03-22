@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Repositories.Commons;
+using Application.Models.UsersBooks;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;

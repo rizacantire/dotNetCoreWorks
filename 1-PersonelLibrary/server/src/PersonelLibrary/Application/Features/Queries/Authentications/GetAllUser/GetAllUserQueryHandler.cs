@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Repositories;
 using Application.Models.Authentications;
+using Application.Models.UsersBooks;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -31,13 +32,15 @@ namespace Application.Features.Queries.Authentications.GetAllUser
 
         public async Task<IList<UserModel>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
-            var userList = _userRepository.GetAll();
+            string[] includes = {"UsersBooks","UsersBooks.Book", "UsersBooks.Book.Author", "UsersBooks.Book.Category" };
+            var userList =await _userRepository.GetAllAsync(includeStrings: includes );
             var userModelList = new List<UserModel>();
             foreach(var user in userList)
             {
                 var userModel = new UserModel();
                 userModel = _mapper.Map<UserModel>(user);
                 userModel.Roles = await _userManager.GetRolesAsync(user);
+                userModel.Books = _mapper.Map<IList<UsersBooksVm>>(user.UsersBooks);
                 userModelList.Add(userModel);
             }
             return userModelList;

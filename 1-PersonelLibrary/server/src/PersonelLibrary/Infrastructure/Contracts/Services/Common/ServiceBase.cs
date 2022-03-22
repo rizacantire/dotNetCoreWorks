@@ -18,9 +18,9 @@ namespace Infrastructure.Contracts.Services.Common
             _repository = repository;
         }
 
-        public async  Task Add(T entity)
+        public async  Task<T> Add(T entity)
         {
-            await _repository.AddAsync(entity);
+            return await _repository.AddAsync(entity);
         }
 
         public async Task Delete(T entity)
@@ -42,6 +42,14 @@ namespace Infrastructure.Contracts.Services.Common
         public async Task Update(T entity)
         {
             await _repository.UpdateAsync(entity);
+        }
+
+        public virtual async Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            if (entities == null)
+                throw new ArgumentNullException(nameof(entities));
+
+            await _repository.AddRangeAsync(entities);
         }
     }
 }

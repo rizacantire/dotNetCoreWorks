@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Models.Users
 {
-    internal class UserVm
+    public class UserVm
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
     }
 }

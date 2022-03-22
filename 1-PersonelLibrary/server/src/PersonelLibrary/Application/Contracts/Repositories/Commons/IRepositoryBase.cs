@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Contracts.Repositories.Commons
 {
-    public interface IRepositoryBase<T> where T : EntityBase
+    public interface IRepositoryBase<T> where  T  : EntityBase
     {
 
 
@@ -26,6 +26,8 @@ namespace Application.Contracts.Repositories.Commons
         Task UpdateAsync(T entity);
 
         Task RemoveAsync(T entity);
+
+        Task AddRangeAsync(IEnumerable<T> entities);
 
 
     }

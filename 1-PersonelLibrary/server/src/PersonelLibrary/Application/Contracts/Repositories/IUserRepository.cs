@@ -13,9 +13,11 @@ namespace Application.Contracts.Repositories
     {
         Task<User> GetAsync(Expression<Func<User, bool>> predicate = null);
 
-       IList<User> GetAll();
-       IList<User> GetAll(Expression<Func<User, bool>> predicate = null, Func<IQueryable<User>, IOrderedQueryable<User>> orderBy = null, List<Expression<Func<User, object>>> includes = null, bool disableTracking = true);
-
+        Task<IReadOnlyList<User>> GetAllAsync();
+        Task<IReadOnlyList<User>> GetAllAsync(Expression<Func<User, bool>> predicate = null,
+                                       Func<IQueryable<User>, IOrderedQueryable<User>> orderBy = null,
+                                       bool disableTracking = true,
+                                       string includeString = null, params string[] includeStrings);
 
         Task<User> GetByIdAsync(int id);
 
@@ -24,5 +26,7 @@ namespace Application.Contracts.Repositories
         Task UpdateAsync(User entity);
 
         Task RemoveAsync(User entity);
+
+        Task AddRangeAsync(IEnumerable<User> entities);
     }
 }

@@ -12,6 +12,7 @@ using Application.Models.Authentications;
 using Application.Models.Authors;
 using Application.Models.Books;
 using Application.Models.Categories;
+using Application.Models.Users;
 using Application.Models.UsersBooks;
 using AutoMapper;
 using Domain.Entities;
@@ -28,6 +29,8 @@ namespace Application.Mappings
             CreateMap<User, SignUpUserCommand>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<User, UpdateUserCommand>().ReverseMap();
+            CreateMap<User, UserVm>().ReverseMap();
+
 
             #endregion
             #region Categories
@@ -80,11 +83,16 @@ namespace Application.Mappings
             #region Users Book
             
             CreateMap<UsersBooksUpdateVm, UsersBooks>().ReverseMap();
-            
+            CreateMap<UsersBooks, UsersBooksAdminVm>().ReverseMap();
+
             CreateMap<UsersBooks, UpdateUserBookCommand>().ReverseMap();
             CreateMap<UsersBooksAddVm, UsersBooks>().ReverseMap();
-            CreateMap<UsersBooks, UsersBooksVm>().ReverseMap();
+            CreateMap<UsersBooks, UsersBooksVm>().ReverseMap(); 
             CreateMap<UsersBooks, AddUserBookCommand>().ReverseMap();
+            CreateMap<UsersBooks, AllUserBooksVm>().ReverseMap();
+            CreateMap<UsersBooks, UserBooksByUserVm>().ReverseMap();
+
+
 
 
             #endregion

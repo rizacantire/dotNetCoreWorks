@@ -27,7 +27,6 @@ namespace Application.Features.Commands.Authors.AuthorAdd
 
         public async Task<Author> Handle(AuthorAddCommand request, CancellationToken cancellationToken)
         {
-            //await _check.CheckIsExistByNameAsync(request.Name);
             await _check.CheckIsExistByFullNameAsync(request.FirstName,request.LastName);
 
             var authorEntity = _mapper.Map<Author>(request);

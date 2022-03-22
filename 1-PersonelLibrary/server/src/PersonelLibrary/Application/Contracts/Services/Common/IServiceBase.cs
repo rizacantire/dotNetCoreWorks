@@ -10,9 +10,11 @@ namespace Application.Contracts.Services.Common
     public interface IServiceBase<T> where T : EntityBase
     {
         Task<IReadOnlyList<T>> GetAll();
-        Task Add(T entity);
+        Task<T> Add(T entity);
         Task Delete(T entity);
         Task Update(T entity);
         Task<T> GetById(int id);
+
+        Task AddRangeAsync(IEnumerable<T> entities);
     }
 }

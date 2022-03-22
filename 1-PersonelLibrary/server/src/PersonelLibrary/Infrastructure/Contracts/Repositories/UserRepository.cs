@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Infrastructure.Contracts.Repositories.Common;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,40 +20,74 @@ namespace Infrastructure.Contracts.Repositories
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
-        public Task<User> AddAsync(User entity)
+        public async Task<User> AddAsync(User entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<User>().Add(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return entity;
         }
 
-        public IList<User> GetAll()
+        public async Task UpdateAsync(User entity)
         {
-            var userList = _dbContext.Users.ToList();
-            return userList;
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IList<User> GetAll(Expression<Func<User, bool>> predicate = null, Func<IQueryable<User>, IOrderedQueryable<User>> orderBy = null, List<Expression<Func<User, object>>> includes = null, bool disableTracking = true)
+        public async Task RemoveAsync(User entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<User>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<User> GetAsync(Expression<Func<User, bool>> predicate = null)
+
+        public  async Task<IReadOnlyList<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var list =await _dbContext.Set<User>().ToListAsync();
+
+            return list;
+
         }
 
-        public Task<User> GetByIdAsync(int id)
+        public async Task<User> GetAsync(Expression<Func<User , bool>> predicate = null)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<User>().Where(predicate).FirstOrDefaultAsync();
         }
 
-        public Task RemoveAsync(User entity)
+
+        public async Task<User> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<User>().FindAsync(id);
         }
 
-        public Task UpdateAsync(User entity)
+
+        public async Task<IReadOnlyList<User>> GetAllAsync(Expression<Func<User , bool>> predicate = null, Func<IQueryable<User>, IOrderedQueryable<User>> orderBy = null, bool disableTracking = true, string includeString = null, params string[] includeStrings)
         {
-            throw new NotImplementedException();
+            IQueryable<User> query = _dbContext.Set<User>();
+            if (disableTracking) query = query.AsNoTracking();
+
+            if (predicate != null) query = query.Where(predicate);
+
+            if (orderBy != null)
+                return await orderBy(query).ToListAsync();
+
+            if (!string.IsNullOrWhiteSpace(includeString)) query = query.Include(includeString);
+
+            if (includeStrings.Length > 0)
+            {
+                foreach (var include in includeStrings)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            return await query.ToListAsync();
+        }
+
+        public virtual async Task AddRangeAsync(IEnumerable<User> entities)
+        {
+            await _dbContext.Set<User>().AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

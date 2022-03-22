@@ -20,7 +20,7 @@ namespace Infrastructure.Contracts.Repositories
         {
             var list = base.GetAllAsync(b => b.UserId == userID).Result.ToList();
             return list;
-           
+  
 
         }
     }

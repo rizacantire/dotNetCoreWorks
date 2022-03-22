@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.Models.UsersBooks;
+using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,8 @@ namespace Application.Models.Authentications
         public string LastName { get; set; }
         public string Password { get; set; }
         public IList<string> Roles { get; set; }
+        public IList<UsersBooksVm> Books { get; set; }
+
 
     }
 }

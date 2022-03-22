@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Contracts.Repositories.Common
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : EntityBase
+    public class RepositoryBase<T> : IRepositoryBase<T> where  T  : EntityBase
     {
         private readonly LibraryContext _dbContext;
 
@@ -85,6 +85,11 @@ namespace Infrastructure.Contracts.Repositories.Common
             return await query.ToListAsync();
         }
 
+        public virtual async Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using API.Controllers.Commons;
 using Application.Contracts.Services;
 using Application.Features.Commands.Books.BookAdd;
+using Application.Features.Commands.Books.BookAddRange;
 using Application.Features.Commands.Books.BookDelete;
 using Application.Features.Commands.Books.BookUpdate;
 using Application.Features.Queries.Books.GetBooks;
@@ -10,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -19,10 +21,14 @@ namespace API.Controllers
     {
         private IBookService _bookService;
         private IMapper _mapper;
-        public BookController(IMediator mediator, IBookService bookService, IMapper mapper) : base(mediator)
+        private readonly IBookXmlService _bookXmlService;
+        private readonly IMediator _mediator;
+        public BookController(IMediator mediator, IBookService bookService, IMapper mapper, IBookXmlService bookXmlService) : base(mediator)
         {
             _bookService = bookService;
             _mapper = mapper;
+            _bookXmlService = bookXmlService;
+            _mediator = mediator;
         }
 
         [HttpGet("getDetail")]
@@ -40,6 +46,22 @@ namespace API.Controllers
           
             return Ok(_mapper.Map<List<BookByAuthor>>(list));
 
+        }
+
+        [HttpPost("GetBookWithXml")]
+        public IActionResult GetBookWithXml(IFormFile file)
+        {
+
+            var list = _bookXmlService.GetXmlDatas(file);
+
+            return Ok(list);
+
+        }
+
+        [HttpPost(("AddRange"))]
+        public async Task<IActionResult> AddRange(BookAddRangeCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
     }
 }
