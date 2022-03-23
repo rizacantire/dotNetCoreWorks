@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Application.Contracts.Services;
 using Application.Features.Commands.UserBooks.AddUserBook;
+using Application.Features.Commands.UserBooks.DeleteUserBook;
 using Application.Features.Commands.UserBooks.UpdateUserBook;
 using Application.Models.UsersBooks;
 using AutoMapper;
@@ -15,7 +16,6 @@ namespace API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin,User,Moderator")]
     public class UserBooksController : ControllerBase
     {
         private readonly IUsersBooksService _usersBooksService;
@@ -76,6 +76,15 @@ namespace API.Controllers
         {
             return Ok(_mediator.Send(book));
         }
+        [HttpPost]
+        [Route("delete")]
+       
+        public  IActionResult DeleteUserBooks([FromBody] DeleteUserBookCommand command)
+        {
+            int userId = SignedUserId();
+            command.UserId = userId;
+            return Ok(_mediator.Send(command));
+        }
 
         int SignedUserId()
         {
@@ -84,7 +93,7 @@ namespace API.Controllers
             {
                 identityKey = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
             }
-         
+
             return int.Parse(identityKey);
         }
 

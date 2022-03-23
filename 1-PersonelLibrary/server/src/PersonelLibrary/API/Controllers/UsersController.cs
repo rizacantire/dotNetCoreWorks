@@ -1,4 +1,5 @@
 ﻿using Application.Features.Commands.Authentications.UpdateUser;
+using Application.Features.Commands.Users.ChangePassword;
 using Application.Features.Queries.Authentications.GetAllUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,14 @@ namespace API.Controllers
 
         [HttpPut]
         public IActionResult Update([FromBody] UpdateUserCommand command)
+        {
+            var result = _mediatr.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("changePass")]
+        public IActionResult ChangePassword([FromBody] ChangePassswordCommand command)
         {
             var result = _mediatr.Send(command);
             return Ok(result);

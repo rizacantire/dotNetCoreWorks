@@ -85,10 +85,6 @@ namespace API.Controllers
             stream.Position = 0;
             string excelName = $"UserList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
-           
-            
-
-
         }
     }
 }

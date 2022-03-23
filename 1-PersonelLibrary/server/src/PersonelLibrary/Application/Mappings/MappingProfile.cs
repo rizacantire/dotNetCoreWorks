@@ -89,8 +89,10 @@ namespace Application.Mappings
             CreateMap<UsersBooksAddVm, UsersBooks>().ReverseMap();
             CreateMap<UsersBooks, UsersBooksVm>().ReverseMap(); 
             CreateMap<UsersBooks, AddUserBookCommand>().ReverseMap();
-            CreateMap<UsersBooks, AllUserBooksVm>().ReverseMap();
+            CreateMap<UsersBooks, AllUserBooksVm>().ReverseMap(); 
             CreateMap<UsersBooks, UserBooksByUserVm>().ReverseMap();
+            CreateMap<UsersBooks, UsersBooksDeleteVm>().ReverseMap();
+
 
 
 
